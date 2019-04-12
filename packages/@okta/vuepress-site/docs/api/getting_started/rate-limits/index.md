@@ -37,7 +37,7 @@ High capacity rate limits apply to a variety of endpoints across different APIs 
 
 ### Okta API Endpoints and Per Minute Limits
 
-Note that limits for more specific endpoints override the limits for less specific endpoints. For example, the limit for getting an application by ID is higher than the more general limit for the `/api/v1/apps` endpoint.
+Unless otherwise stated, a shared rate limit applies to all APIs that share the listed path as a prefix to their URI. In cases where multiple paths are a prefix, the longest prefix will apply. Remember, the most specific rate limit will always be the one that applies. The most common APIs are covered here; this is not an exhaustive list of every single API within Okta. 
 
 | Action and Okta API Endpoint                                                                                 | Developer (free) | Developer (paid) | One App | Enterprise | Workforce Identity |
 | ------------------------------------------------------------------------------------------------------------ | ---------------- | ---------------- | ------- | ---------- | ------------------ |
@@ -58,11 +58,11 @@ Note that limits for more specific endpoints override the limits for less specif
 | **OAuth2 requests for the Org Authorization Server:**<br>`/oauth2/v1` except `/oauth2/v1/clients`            | 300              | 600              | 600*    | 1200*      | 2000               |
 | **OAuth2 client configuration requests:**<br>`/oauth2/v1/clients`                                            | 25               | 50               | 50      | 100        | 100                |
 | **All other OAuth2 requests:**<br>`/oauth2`                                                                  | 100              | 300              | 300     | 600        | 600                |
-| **All other actions:**<br>`/api/v1/`                                                                         | 100              | 300              | 300*    | 600*       | 1200               |
+| **Most other API actions:**<br>`/api/v1`                                                                         | 100              | 300              | 300*    | 600*       | 1200               |
 
 These rate limits apply to all new Okta organizations. For orgs created before 2018-05-17, the [previous rate limits](#previous-rate-limits) still apply.
 
-* The limits for these endpoints can be increased by purchasing the [High-Capacity add-on](#high-capacity-rate-limits).
+*The limits for these endpoints can be increased by purchasing the [High-Capacity add-on](#high-capacity-rate-limits).
 
 ### Okta API Endpoints and Per-User Limits
 API endpoints that take username and password credentials, including the [Authentication API](/docs/api/resources/authn) and the [OAuth 2.0 resource owner password flow](/authentication-guide/implementing-authentication/password), have a per-username rate limit to prevent brute force attacks with the user's password:
@@ -72,9 +72,9 @@ API endpoints that take username and password credentials, including the [Authen
 | **Authenticate the same user:**<br>`/api/v1/authn`                | 4 per second               |
 | **Generate or refresh an OAuth 2.0 token:**<br>`/oauth2/v1/token` | 4 per second               |
 
-### Okta Rate Limits for All Other Endpoints
+### Okta Rate Limits for Other Endpoints
 
-Finally, for all endpoints not listed in the tables above, the API rate limit is a combined rate limit:
+Finally, for most endpoints not listed in the tables above, the API rate limit is a combined rate limit:
 
 | Developer (free) | Developer (paid) | One App    | Enterprise | Workforce Identity |
 | ---------------- | ---------------- | ---------- | ---------- | ------------------ |
@@ -354,7 +354,7 @@ These are the rate limits for orgs created before 2018-05-17.
 
 ### Org-Wide Rate Limits (Legacy Orgs)
 
-Extensions to the base URLs listed below are included in the specified limit, unless the URL is followed by "only." For example, `/api/v1/apps/{id}` has a per-minute rate limit of `500` as listed in the second line in the table. However, `/api/v1/apps/{id}/users` falls under the more general first line of the table. This pattern applies to all the URLs.
+Unless otherwise stated, a shared rate limit applies to all APIs that share the listed path as a prefix to their URI. In cases where multiple paths are a prefix, the longest prefix will apply. Remember, the most specific rate limit will always be the one that applies. The most common APIs are covered here; this is not an exhaustive list of every single API within Okta. 
 
 | Action                                    | Okta API Endpoint                                                       | Per Minute Limit (Older Orgs) |
 | :---------                                | :--------------------------------------------------------------         | -----------------------:      |
